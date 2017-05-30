@@ -40,12 +40,12 @@ public class GestionStock  {
 
 			produits.add(produit);			
 			produit.setStock(stock);
-
+			mongoOperation.save(new Produit(4));
 		}
 		stock.setProduits(produits);
 		
 		
-		mongoOperation.save(new Produit(94));
+		
 		stocks.add(stock);
 		
 		

@@ -16,7 +16,7 @@ public class Main {
 		GestionStock gestionStock = new GestionStock();
 		int typeProduit = 1;
 		int nombreProduits = 5;
-		gestionStock.creerStock(typeProduit, nombreProduits);
+		//gestionStock.creerStock(typeProduit, nombreProduits);
 		
 	}
 

@@ -1,17 +1,13 @@
 package stocks.domain;
 
-import org.springframework.data.annotation.Id;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Produit {
-	@Id
-    public String id;
-
+	
 	@JsonIgnore
 	Stock stock;
 	int typeProduit;
-	 public Produit() {}
+
 	public Produit(int typeProduit) {
 		super();
 		this.typeProduit = typeProduit;

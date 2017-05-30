@@ -13,9 +13,9 @@ import stocks.domain.ProduitRepository;
 @SpringBootApplication
 public class GestionStocksApplication implements CommandLineRunner {
 	@Autowired
-	private CustomerRepository repository;
+	public CustomerRepository repository;
 	@Autowired
-	private ProduitRepository repository2;
+	public ProduitRepository repository2;
 
 	public static void main(String[] args) {
 		SpringApplication.run(GestionStocksApplication.class, args);
@@ -23,7 +23,7 @@ public class GestionStocksApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		repository.deleteAll();
-		repository2.save(new Produit(2));
+		
 		// save a couple of customers
 		repository.save(new Customer("Alice", "Smith"));
 		repository.save(new Customer("Bob", "Smith"));

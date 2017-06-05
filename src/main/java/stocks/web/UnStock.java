@@ -1,36 +1,62 @@
 package stocks.web;
 
-public class UnStock {
-	
-	int typeProduit;
+import java.io.Serializable;
+import java.util.List;
+
+import stocks.domain.Produit;
+
+public class UnStock implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	int nombreProduits;
-	
+	int qte;
+	private List<Produit> produits;
+	String nom;
+
 	public UnStock() {
 		super();
 	}
 
-	public UnStock(int typeProduit, int nombreProduits) {
+	public UnStock(int qte, int nombreProduits, String nom) {
 		super();
-		this.typeProduit = typeProduit;
+		this.qte = qte;
 		this.nombreProduits = nombreProduits;
+		this.nom = nom;
 	}
 
-	public int getTypeProduit() {
-		return typeProduit;
+	public List<Produit> getProduits() {
+		return produits;
 	}
-	
-	public void setTypeProduit(int typeProduit) {
-		this.typeProduit = typeProduit;
+
+	public void setProduits(List<Produit> produits) {
+		this.produits = produits;
 	}
-	
+
+	public int getQte() {
+		return qte;
+	}
+
+	public void setQte(int qte) {
+		this.qte = qte;
+	}
+
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
 	public int getNombreProduits() {
 		return nombreProduits;
 	}
-	
+
 	public void setNombreProduits(int nombreProduits) {
 		this.nombreProduits = nombreProduits;
 	}
-	
-	
 
 }

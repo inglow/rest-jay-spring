@@ -14,8 +14,8 @@ import stocks.domain.ProduitRepository;
 public class GestionStocksApplication implements CommandLineRunner {
 	@Autowired
 	public CustomerRepository repository;
-	@Autowired
-	public ProduitRepository repository2;
+
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(GestionStocksApplication.class, args);

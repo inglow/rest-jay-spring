@@ -14,15 +14,23 @@ public class Produit  {
 	String nom;
 	int qte;
 	ProduitCategorie produitCategorie;
+	public Produit(ProduitCategorie produitCategorie) {
+		super();
+		this.produitCategorie = produitCategorie;
+	}
 	public Produit() {
 		super();
-	}
-	public Produit(int qte, String nom) {
-		super();
-		this.qte = qte;
-		this.nom = nom;
+		produitCategorie =new ProduitCategorie();
+		
+
 	}
 
+	public Produit(String nom, int qte, ProduitCategorie produitCategorie) {
+		super();
+		this.nom = nom;
+		this.qte = qte;
+		this.produitCategorie = produitCategorie;
+	}
 	public String getNom() {
 		return nom;
 	}
@@ -51,7 +59,12 @@ public class Produit  {
 		this.stock = stock;
 	}
 	public void addProduitCategorie(String nom, String libelle) {
-		new ProduitCategorie(libelle, nom);
+		this.produitCategorie.setNom(nom);
+		this.produitCategorie.setLibelle(libelle);	
+	}
+	@Override
+	public String toString() {
+		return "Produit [ nom=" + nom + ", qte=" + qte + "]";
 	}
 
 	

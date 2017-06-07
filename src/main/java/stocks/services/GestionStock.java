@@ -20,6 +20,7 @@ import stocks.SpringMongoConfig;
 import stocks.domain.Produit;
 import stocks.domain.ProduitRepository;
 import stocks.domain.Stock;
+import stocks.web.UnStock;
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan
@@ -36,7 +37,9 @@ public class GestionStock  {
 		Stock stock = new Stock(produits);
 		for(int i=0; i<3; i++){
 			System.out.println(nom+"dddddddddddddd");
-			Produit produit = new Produit(j, "object"); 
+			Produit produit = new Produit();
+			produit.setQte(j);
+			produit.setNom("object2");
 			produits.add(produit);
 			produit.addProduitCategorie(nom, "test");
 			produit.setStock(stock);
@@ -49,6 +52,16 @@ public class GestionStock  {
 		stocks.add(stock);
 		
 		
+	}
+	public void createStock(UnStock produits) {
+		for (Produit produit : produits.getProduits()) {
+			// personService.save(person);
+			System.out.println(produit.getProduitCategorie());
+			System.out.println("je suis la");
+			mongoOperation.save(produit);
+			mongoOperation.save(produit.getProduitCategorie());
+
+		}
 	}
 
 	public List<Stock> listerStocks() {

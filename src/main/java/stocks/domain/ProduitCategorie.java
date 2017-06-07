@@ -4,11 +4,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class ProduitCategorie {
 	
-	@JsonIgnore
+	
 	String libelle;
 	String nom;
 
-	public ProduitCategorie(String libelle, String nom) {
+	
+
+	public ProduitCategorie() {
 		super();
 		this.libelle = libelle;
 		this.nom = nom;
@@ -28,8 +30,13 @@ public class ProduitCategorie {
 		return libelle;
 	}
 
-	public void setTypeLibelle(String libelle) {
+	public void setLibelle(String libelle) {
 		this.libelle = libelle;
+	}
+
+	@Override
+	public String toString() {
+		return "ProduitCategorie [libelle=" + libelle + ", nom=" + nom + "]";
 	}
 	
 	

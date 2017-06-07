@@ -5,12 +5,11 @@ import java.util.List;
 
 import stocks.domain.Produit;
 
-public class UnStock implements Serializable {
+public class UnStock  {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
 	int nombreProduits;
 	int qte;
 	private List<Produit> produits;

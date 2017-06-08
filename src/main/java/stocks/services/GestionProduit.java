@@ -20,6 +20,7 @@ import com.mongodb.DBObject;
 
 import stocks.SpringMongoConfig;
 import stocks.domain.Produit;
+import stocks.domain.ProduitCategorie;
 import stocks.domain.ProduitRepository;
 import stocks.domain.Stock;
 
@@ -31,13 +32,41 @@ public class GestionProduit {
 	ApplicationContext ctx = new AnnotationConfigApplicationContext(SpringMongoConfig.class);
 	MongoOperations mongoOperation = (MongoOperations) ctx.getBean("mongoTemplate");
 
-	public void creerProduit(int qte, String nom) {
+	public void creerProduit(int qte, String nom, ProduitCategorie produitCategorie) {
 		System.out.println("bob");
+
 		Produit produit = new Produit();
-		produit.setNom(nom);
+		ProduitCategorie produitC = new ProduitCategorie();
+		System.out.println(nom + "dddddddddddddd");
 		produit.setNom(nom);
 		produit.setQte(qte);
+		produit.setProduitCategorie(produitCategorie);
+		produitC.setLibelle(produitCategorie.getLibelle());
+		produitC.setNom(produitCategorie.getNom());
+		String nomCategorie = produitC.getNom();
 		mongoOperation.save(produit);
+
+		DBCursor cursor = mongoOperation.getCollection("produitCategorie").find();
+		Boolean existCategorie = false;
+		while (cursor.hasNext()) {
+			DBObject obj = cursor.next();
+
+			produitC.setNom((String) obj.get("nom"));
+			produitC.setLibelle((String) obj.get("libelle"));
+			System.out.println(nomCategorie + produitC.getNom());
+			if (nomCategorie.equals(produitC.getNom())) {
+				System.out.println("La produit Catégorie existe déjà");
+
+				existCategorie = true;
+				break;
+			}
+			// do your thing
+		}
+		if (!existCategorie) {
+			System.out.println("test");
+			mongoOperation.save(produitC);
+		}
+
 	}
 
 	public List<Produit> listerProduit() {

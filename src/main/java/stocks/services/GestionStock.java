@@ -16,6 +16,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
+
 import stocks.SpringMongoConfig;
 import stocks.domain.Produit;
 import stocks.domain.ProduitRepository;
@@ -25,47 +28,36 @@ import stocks.web.UnStock;
 @EnableAutoConfiguration
 @ComponentScan
 public class GestionStock  {
-	List<Stock> stocks = new ArrayList<Stock>();
+	List<UnStock> unStock = new ArrayList<UnStock>();
+	List<Stock> stocks =new ArrayList<Stock>();
 	ApplicationContext ctx =
             new AnnotationConfigApplicationContext(SpringMongoConfig.class);
 	MongoOperations mongoOperation =
             (MongoOperations) ctx.getBean("mongoTemplate");
-	public void creerStock(int j, int nombreProduits, String nom){
-		System.out.println("bob");
-		ArrayList<Produit> produits = new ArrayList<Produit>();
-		
-		Stock stock = new Stock(produits);
-		for(int i=0; i<3; i++){
-			System.out.println(nom+"dddddddddddddd");
-			Produit produit = new Produit();
-			produit.setQte(j);
-			produit.setNom("object2");
-			produits.add(produit);
-			produit.addProduitCategorie(nom, "test");
-			produit.setStock(stock);
-			mongoOperation.save(produit);
-		}
-		stock.setProduits(produits);
-		
-		
-		
-		stocks.add(stock);
-		
-		
-	}
-	public void createStock(UnStock produits) {
-		for (Produit produit : produits.getProduits()) {
+
+	public void createStock(int id, int qte) {
+	/*	for (Produit produit : produits.getProduits()) {
 			// personService.save(person);
 			System.out.println(produit.getProduitCategorie());
 			System.out.println("je suis la");
 			mongoOperation.save(produit);
-			mongoOperation.save(produit.getProduitCategorie());
-
+			
 		}
+		*/
+		
+		
+			UnStock stock = new UnStock();
+	
+			stock.setId(id);
+			stock.setQte(qte);
+			mongoOperation.save(stock);
+			// do your thing
+		
+		
 	}
 
 	public List<Stock> listerStocks() {
-		return stocks;
+return stocks;
 	}
 
 

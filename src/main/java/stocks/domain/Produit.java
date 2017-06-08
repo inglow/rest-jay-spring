@@ -14,15 +14,10 @@ public class Produit  {
 	String nom;
 	int qte;
 	ProduitCategorie produitCategorie;
-	public Produit(ProduitCategorie produitCategorie) {
-		super();
-		this.produitCategorie = produitCategorie;
-	}
+	
 	public Produit() {
 		super();
-		produitCategorie =new ProduitCategorie();
-		
-
+		this.produitCategorie =new ProduitCategorie();
 	}
 
 	public Produit(String nom, int qte, ProduitCategorie produitCategorie) {

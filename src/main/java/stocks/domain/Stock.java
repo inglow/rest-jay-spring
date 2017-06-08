@@ -6,8 +6,9 @@ import java.util.ArrayList;
 public class Stock{
 
 
+
 	ArrayList<Produit> produits = new ArrayList<Produit>();
-	public Stock(ArrayList<Produit> produits) {
+	public Stock() {
 		super();
 		this.produits = produits;
 	}
@@ -19,5 +20,6 @@ public class Stock{
 	public void setProduits(ArrayList<Produit> produits) {
 		this.produits = produits;
 	}
+
 
 }

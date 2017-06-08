@@ -1,7 +1,6 @@
 package stocks.web;
 
-import java.io.Console;
-import java.util.ArrayList;
+
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -15,20 +14,14 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import stocks.services.GestionProduit;
 import stocks.services.GestionStock;
 import stocks.domain.Produit;
-import stocks.domain.ProduitWrapper;
 import stocks.domain.Stock;
 
 @Controller
 public class GestionStocksController {
 
 	GestionStock gestionStock = new GestionStock();
-	GestionProduit gestionProduit = new GestionProduit();
 
-	@RequestMapping(value = "/produit", method = RequestMethod.POST)
-	@ResponseStatus(HttpStatus.OK)
-	public void creeProduit(@RequestBody Produit produit) {
-		gestionProduit.creerProduit(produit.getQte(), produit.getNom(),produit.getProduitCategorie(),produit.getIdStock());
-	}
+
 
 	@RequestMapping(value = "/stocks", method = RequestMethod.GET)
 	@ResponseBody
@@ -37,19 +30,12 @@ public class GestionStocksController {
 		return gestionStock.listerStocks();
 	}
 
-	@RequestMapping(value = "/produits", method = RequestMethod.GET)
-	@ResponseBody
-	@ResponseStatus(HttpStatus.OK)
-	public List<Produit> listerProduits() {
-		return gestionProduit.listerProduit();
-
-	}
 
 	@RequestMapping(value = "/stocks", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
-	public void  creeStock(@RequestBody UnStock produits) {
-		gestionStock.createStock(produits.getId(),produits.getQte());
+	public void  creeStock(@RequestBody UnStock produit) {
+		gestionStock.createStock(produit.getId(),produit.getQte(),produit.getNom());
              
 	}
 

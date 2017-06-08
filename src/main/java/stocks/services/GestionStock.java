@@ -35,7 +35,7 @@ public class GestionStock  {
 	MongoOperations mongoOperation =
             (MongoOperations) ctx.getBean("mongoTemplate");
 
-	public void createStock(int id, int qte) {
+	public void createStock(int id, int qte,String nom) {
 	/*	for (Produit produit : produits.getProduits()) {
 			// personService.save(person);
 			System.out.println(produit.getProduitCategorie());
@@ -47,7 +47,7 @@ public class GestionStock  {
 		
 		
 			UnStock stock = new UnStock();
-	
+			stock.setNom(nom);
 			stock.setId(id);
 			stock.setQte(qte);
 			mongoOperation.save(stock);

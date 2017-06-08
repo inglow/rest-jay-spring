@@ -13,13 +13,21 @@ public class UnStock {
 
 	int qte;
 	int id;
-
+	String nom;
 	public UnStock() {
 		super();
 	}
 
 	public int getId() {
 		return id;
+	}
+
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
 	}
 
 	public void setId(int id) {

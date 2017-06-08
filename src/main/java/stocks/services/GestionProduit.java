@@ -13,6 +13,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.query.BasicQuery;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 import com.mongodb.DBCursor;
@@ -69,7 +70,7 @@ public class GestionProduit {
 
 	}
 
-	public List<Produit> listerProduit() {
+	public List<Produit> listerProduits() {
 		System.out.println("bob");
 
 		DBCursor cursor = mongoOperation.getCollection("produit").find();
@@ -83,6 +84,18 @@ public class GestionProduit {
 			// do your thing
 		}
 		return produits;
+	}
+	public Produit listerProduit(int idStock) {
+		System.out.println("bob");
+		BasicQuery query1 = new BasicQuery("{idStock : "+idStock+"}");
+		Produit produit = mongoOperation.findOne(query1, Produit.class);
+
+		System.out.println("query1 - " + query1.toString());
+		System.out.println("userTest1 - " + produit);		
+		
+			// do your thing
+		
+		return produit;
 	}
 
 }

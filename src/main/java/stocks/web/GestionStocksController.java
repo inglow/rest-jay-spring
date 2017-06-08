@@ -31,11 +31,11 @@ public class GestionStocksController {
 	}
 
 
-	@RequestMapping(value = "/stocks", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-	@ResponseStatus(HttpStatus.OK)
+	@RequestMapping(value = "/stocks", method = RequestMethod.POST)
 	@ResponseBody
-	public void  creeStock(@RequestBody UnStock produit) {
-		gestionStock.createStock(produit.getId(),produit.getQte(),produit.getNom());
+	@ResponseStatus(HttpStatus.OK)
+	public String creeStock(@RequestBody UnStock produit) {
+		return gestionStock.createStock(produit.getId(),produit.getQte(),produit.getNom());
              
 	}
 

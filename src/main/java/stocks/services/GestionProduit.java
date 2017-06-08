@@ -33,7 +33,7 @@ public class GestionProduit {
 	ApplicationContext ctx = new AnnotationConfigApplicationContext(SpringMongoConfig.class);
 	MongoOperations mongoOperation = (MongoOperations) ctx.getBean("mongoTemplate");
 
-	public void creerProduit(int qte, String nom, ProduitCategorie produitCategorie, int idStock) {
+	public String creerProduit(int qte, String nom, ProduitCategorie produitCategorie, int idStock) {
 		System.out.println("bob");
 
 		Produit produit = new Produit();
@@ -57,16 +57,18 @@ public class GestionProduit {
 			produitC.setLibelle((String) obj.get("libelle"));
 			System.out.println(nomCategorie + produitC.getNom());
 			if (nomCategorie.equals(produitC.getNom())) {
-				System.out.println("La produit Catégorie existe déjà");
 				existCategorie = true;
-				break;
+				return "La produit Catégorie existe déjà , elle n'est donc pas créer";
+				
 			}
 	
 		}
 		if (!existCategorie) {
-			System.out.println("Une nouvelle Catégorie à été crée car la catégori n'existe pas.");
 			mongoOperation.save(produitC);
+			return "Une nouvelle Catégorie à été crée car la catégorie n'existe pas.";
+
 		}
+		return "";
 
 	}
 
@@ -90,10 +92,18 @@ public class GestionProduit {
 		BasicQuery query1 = new BasicQuery("{idStock : "+idStock+"}");
 		Produit produit = mongoOperation.findOne(query1, Produit.class);
 
-		System.out.println("query1 - " + query1.toString());
-		System.out.println("userTest1 - " + produit);		
+		
 		
 			// do your thing
+		
+		return produit;
+	}
+	public Produit listerProduitbyId(String id) {
+		System.out.println("bob");
+		BasicQuery query1 = new BasicQuery("{nom : '"+id+"'}");
+		Produit produit = mongoOperation.findOne(query1, Produit.class);
+
+			
 		
 		return produit;
 	}

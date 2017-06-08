@@ -21,20 +21,26 @@ import stocks.domain.Stock;
 public class GestionProduitsController {
 
 	GestionProduit gestionProduit = new GestionProduit();
-
+	@ResponseBody
 	@RequestMapping(value = "/produit", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.OK)
-	public void creeProduit(@RequestBody Produit produit) {
-		gestionProduit.creerProduit(produit.getQte(), produit.getNom(),produit.getProduitCategorie(),produit.getIdStock());
+	public String creeProduit(@RequestBody Produit produit) {
+		return gestionProduit.creerProduit(produit.getQte(), produit.getNom(),produit.getProduitCategorie(),produit.getIdStock());
 	}
 	
 
-	@RequestMapping(value = "/produit/{stockId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/produit/stock/{stockId}", method = RequestMethod.GET)
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
-	public Produit listerProduit(@PathVariable("stockId") int stockId) {
-		System.out.println(stockId+"ididididiididid");
+	public Produit listerProduitStock(@PathVariable("stockId") int stockId) {
 		return gestionProduit.listerProduit(stockId);
+
+	}
+	@RequestMapping(value = "/produit/id/{Id}", method = RequestMethod.GET)
+	@ResponseBody
+	@ResponseStatus(HttpStatus.OK)
+	public Produit listerProduitId(@PathVariable("Id") String id) {
+		return gestionProduit.listerProduitbyId(id);
 
 	}
 	@RequestMapping(value = "/produits", method = RequestMethod.GET)

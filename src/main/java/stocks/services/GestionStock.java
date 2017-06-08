@@ -35,7 +35,7 @@ public class GestionStock  {
 	MongoOperations mongoOperation =
             (MongoOperations) ctx.getBean("mongoTemplate");
 
-	public void createStock(int id, int qte,String nom) {
+	public String createStock(int id, int qte,String nom) {
 	/*	for (Produit produit : produits.getProduits()) {
 			// personService.save(person);
 			System.out.println(produit.getProduitCategorie());
@@ -51,8 +51,7 @@ public class GestionStock  {
 			stock.setId(id);
 			stock.setQte(qte);
 			mongoOperation.save(stock);
-			// do your thing
-		
+			return "Le produit a déja été crée";
 		
 	}
 

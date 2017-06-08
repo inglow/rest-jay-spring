@@ -27,7 +27,7 @@ public class GestionStocksController {
 	@RequestMapping(value = "/produit", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.OK)
 	public void creeProduit(@RequestBody Produit produit) {
-		gestionProduit.creerProduit(produit.getQte(), produit.getNom(),produit.getProduitCategorie());
+		gestionProduit.creerProduit(produit.getQte(), produit.getNom(),produit.getProduitCategorie(),produit.getIdStock());
 	}
 
 	@RequestMapping(value = "/stocks", method = RequestMethod.GET)

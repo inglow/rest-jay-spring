@@ -32,7 +32,7 @@ public class GestionProduit {
 	ApplicationContext ctx = new AnnotationConfigApplicationContext(SpringMongoConfig.class);
 	MongoOperations mongoOperation = (MongoOperations) ctx.getBean("mongoTemplate");
 
-	public void creerProduit(int qte, String nom, ProduitCategorie produitCategorie) {
+	public void creerProduit(int qte, String nom, ProduitCategorie produitCategorie, int idStock) {
 		System.out.println("bob");
 
 		Produit produit = new Produit();
@@ -40,6 +40,7 @@ public class GestionProduit {
 		System.out.println(nom + "dddddddddddddd");
 		produit.setNom(nom);
 		produit.setQte(qte);
+		produit.setIdStock(idStock);
 		produit.setProduitCategorie(produitCategorie);
 		produitC.setLibelle(produitCategorie.getLibelle());
 		produitC.setNom(produitCategorie.getNom());
@@ -50,20 +51,19 @@ public class GestionProduit {
 		Boolean existCategorie = false;
 		while (cursor.hasNext()) {
 			DBObject obj = cursor.next();
-
+	
 			produitC.setNom((String) obj.get("nom"));
 			produitC.setLibelle((String) obj.get("libelle"));
 			System.out.println(nomCategorie + produitC.getNom());
 			if (nomCategorie.equals(produitC.getNom())) {
 				System.out.println("La produit Catégorie existe déjà");
-
 				existCategorie = true;
 				break;
 			}
-			// do your thing
+	
 		}
 		if (!existCategorie) {
-			System.out.println("test");
+			System.out.println("Une nouvelle Catégorie à été crée car la catégori n'existe pas.");
 			mongoOperation.save(produitC);
 		}
 

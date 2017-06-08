@@ -11,6 +11,7 @@ public class Produit  {
 	 */
 	@JsonIgnore
 	Stock stock;
+	int idStock;
 	String nom;
 	int qte;
 	ProduitCategorie produitCategorie;
@@ -28,6 +29,14 @@ public class Produit  {
 	}
 	public String getNom() {
 		return nom;
+	}
+
+	public int getIdStock() {
+		return idStock;
+	}
+
+	public void setIdStock(int idStock) {
+		this.idStock = idStock;
 	}
 
 	public void setNom(String nom) {

@@ -1,6 +1,5 @@
 package stocks.services;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,41 +23,48 @@ import stocks.domain.Produit;
 import stocks.domain.ProduitRepository;
 import stocks.domain.Stock;
 import stocks.web.UnStock;
+
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan
-public class GestionStock  {
-	List<UnStock> unStock = new ArrayList<UnStock>();
-	List<Stock> stocks =new ArrayList<Stock>();
-	ApplicationContext ctx =
-            new AnnotationConfigApplicationContext(SpringMongoConfig.class);
-	MongoOperations mongoOperation =
-            (MongoOperations) ctx.getBean("mongoTemplate");
+public class GestionStock {
+	List<UnStock> stocks = new ArrayList<UnStock>();
+	ApplicationContext ctx = new AnnotationConfigApplicationContext(SpringMongoConfig.class);
+	MongoOperations mongoOperation = (MongoOperations) ctx.getBean("mongoTemplate");
 
-	public String createStock(int id, int qte,String nom) {
-	/*	for (Produit produit : produits.getProduits()) {
-			// personService.save(person);
-			System.out.println(produit.getProduitCategorie());
-			System.out.println("je suis la");
-			mongoOperation.save(produit);
-			
+	public String createStock(int id, int qte, String nom) {
+		/*
+		 * for (Produit produit : produits.getProduits()) { //
+		 * personService.save(person);
+		 * System.out.println(produit.getProduitCategorie());
+		 * System.out.println("je suis la"); mongoOperation.save(produit);
+		 * 
+		 * }
+		 */
+
+		UnStock stock = new UnStock();
+		stock.setNom(nom);
+		stock.setId(id);
+		stock.setQte(qte);
+		mongoOperation.save(stock);
+		return "Le stock a été crée";
+
+	}
+
+	public List<UnStock> listerStocks() {
+		DBCursor cursor = mongoOperation.getCollection("produit").find();
+
+		while (cursor.hasNext()) {
+			DBObject obj = cursor.next();
+			System.out.println(obj.get("nom"));
+			UnStock unStock = new UnStock();
+			unStock.setNom((String) obj.get("nom"));
+			unStock.setQte((int) obj.get("qte"));
+
+			stocks.add(unStock);
+			// do your thing
 		}
-		*/
-		
-		
-			UnStock stock = new UnStock();
-			stock.setNom(nom);
-			stock.setId(id);
-			stock.setQte(qte);
-			mongoOperation.save(stock);
-			return "Le produit a déja été crée";
-		
+		return stocks;
 	}
-
-	public List<Stock> listerStocks() {
-return stocks;
-	}
-
-
 
 }

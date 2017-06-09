@@ -1,5 +1,6 @@
 package stocks.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Stock{

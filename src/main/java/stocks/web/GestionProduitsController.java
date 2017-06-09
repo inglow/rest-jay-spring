@@ -36,10 +36,10 @@ public class GestionProduitsController {
 		return gestionProduit.listerProduit(stockId);
 
 	}
-	@RequestMapping(value = "/produit/id/{Id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/produit/id/{nom}", method = RequestMethod.GET)
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
-	public Produit listerProduitId(@PathVariable("Id") String id) {
+	public Produit listerProduitId(@PathVariable("nom") String id) {
 		return gestionProduit.listerProduitbyId(id);
 
 	}

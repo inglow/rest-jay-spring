@@ -26,7 +26,7 @@ public class GestionStocksController {
 	@RequestMapping(value = "/stocks", method = RequestMethod.GET)
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
-	public List<Stock> listerStocks() {
+	public List<UnStock> listerStocks() {
 		return gestionStock.listerStocks();
 	}
 

@@ -7,7 +7,7 @@ public class ProduitCategorie {
 	
 	String libelle;
 	String nom;
-
+	
 	
 
 	public ProduitCategorie() {

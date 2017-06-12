@@ -1,9 +1,7 @@
-package stocks.web;
+package stocks.domain;
 
 import java.io.Serializable;
 import java.util.List;
-
-import stocks.domain.Produit;
 
 public class UnStock {
 
@@ -30,6 +28,7 @@ public class UnStock {
 		this.nom = nom;
 	}
 
+	
 	public void setId(int id) {
 		this.id = id;
 	}

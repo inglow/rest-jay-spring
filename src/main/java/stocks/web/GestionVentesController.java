@@ -13,39 +13,34 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import stocks.services.GestionProduit;
 import stocks.services.GestionStock;
+import stocks.services.GestionVente;
 import stocks.domain.Produit;
 import stocks.domain.Stock;
 import stocks.domain.UnStock;
+import stocks.domain.UneVente;
 
 @Controller
-public class GestionStocksController {
+public class GestionVentesController {
 
-	GestionStock gestionStock = new GestionStock();
+	GestionVente gestionVente = new GestionVente();
 
 
 
-	@RequestMapping(value = "/stocks", method = RequestMethod.GET)
+	@RequestMapping(value = "/ventes", method = RequestMethod.GET)
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
 	public List<UnStock> listerStocks() {
-		return gestionStock.listerStocks();
+		return gestionVente.listerStocks();
 	}
 
 
-	@RequestMapping(value = "/stocks", method = RequestMethod.POST)
+	@RequestMapping(value = "/ventes", method = RequestMethod.POST)
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
-	public String creeStock(@RequestBody UnStock produit) {
-		return gestionStock.createStock(produit.getId(),produit.getQte(),produit.getNom());
-             
-	}
-	@RequestMapping(value = "/stocks", method = RequestMethod.DELETE)
-	@ResponseBody
-	@ResponseStatus(HttpStatus.OK)
-	public String deleteStock(@RequestBody UnStock produit) {
-		gestionStock.deleteStock(produit);
-		return "test";
-             
+	public String creeStock(@RequestBody UneVente produit) {
+		System.out.println(produit);
+	return gestionVente.succeedVente(produit);
+	
 	}
 
 	

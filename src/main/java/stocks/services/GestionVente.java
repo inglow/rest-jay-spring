@@ -23,45 +23,23 @@ import stocks.domain.Produit;
 import stocks.domain.ProduitRepository;
 import stocks.domain.Stock;
 import stocks.domain.UnStock;
+import stocks.domain.UneVente;
 
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan
-public class GestionStock {
+public class GestionVente {
 	List<UnStock> stocks = new ArrayList<UnStock>();
+	List<Produit> produitList = new ArrayList<Produit>();
 	ApplicationContext ctx = new AnnotationConfigApplicationContext(SpringMongoConfig.class);
 	MongoOperations mongoOperation = (MongoOperations) ctx.getBean("mongoTemplate");
 
-	public String createStock(int id, int qte, String nom) {
-		/*
-		 * for (Produit produit : produits.getProduits()) { //
-		 * personService.save(person);
-		 * System.out.println(produit.getProduitCategorie());
-		 * System.out.println("je suis la"); mongoOperation.save(produit);
-		 * 
-		 * }
-		 */
+	public String succeedVente(UneVente produits) {
 
-		UnStock stock = new UnStock();
-		stock.setNom(nom);
-		stock.setId(id);
-		stock.setQte(qte);
-		System.out.println(stock.getQte());
-		mongoOperation.save(stock);
-		return "Le stock a été crée";
+		for (Produit produit : produits.getProduits()) {
+			mongoOperation.save(produits);
+		}
 
-	}
-	public String deleteStock( UnStock produit) {
-		/*
-		 * for (Produit produit : produits.getProduits()) { //
-		 * personService.save(person);
-		 * System.out.println(produit.getProduitCategorie());
-		 * System.out.println("je suis la"); mongoOperation.save(produit);
-		 * 
-		 * }
-		 */
-
-		mongoOperation.remove(produit);
 		return "Le stock a été crée";
 
 	}
